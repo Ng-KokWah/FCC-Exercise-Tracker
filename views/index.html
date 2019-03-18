@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+   <head>
+      <title>Exercise Tracker | Free Code Camp</title>
+      <link rel="shortcut icon" href="https://cdn.hyperdev.com/us-east-1%3A52a203ff-088b-420f-81be-45bf559d01b1%2Ffavicon.ico" type="image/x-icon"/>
+      <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+      <link href="style.css" rel="stylesheet" type="text/css">
+   </head>
+
+   <body>
+      <div class="container">
+         <h1>Exercise tracker</h1>
+          <form action="/api/exercise/new-user" method="post">
+            <h3>Create a New User</h3>
+            <p><code>POST /api/exercise/new-user</code></p>
+            <input id="uname" type="text" name="username" placeholder="username">
+            <input type="submit" value="Submit">
+          </form>
+          <form action="/api/exercise/add" method="post">
+            <h3>Add exercises</h3>
+            <p><code>POST /api/exercise/add</code></p>
+            <input id="uid" type="text" name="userId" placeholder="userId*">
+            <input id="desc" type="text" name="description" placeholder="description*">
+            <input id="dur" type="text" name="duration" placeholder="duration* (mins.)" pattern="[\d]+" title="Number only!">
+            <input id="dat" type="text" name="date" placeholder="date (yyyy-mm-dd)" pattern="[1-2][0-9]{3}[\-][0-1][0-9][\-][0-3][0-9]" title="Must be in format: yyyy-mm-dd!">
+            <input type="submit" value="Submit">
+          </form>
+          <p><strong>GET users's exercise log: </strong><code>GET /api/exercise/log?{userId}[&amp;from][&amp;to][&amp;limit]</code></p>
+          <p><strong>{ }</strong> = required, <strong>[ ]</strong> = optional</p>
+          <p><strong>from, to</strong> = dates (yyyy-mm-dd); <strong>limit</strong> = number</p>
+        <p><strong>See below for sample usage and outputs...</strong></p>
+        <p><strong>Possible Outputs:</strong></p>
+        <ul>
+          <li>When you GET /api/exerise/users, which retrieves a list of users -- [{"_id":"lhlVEAHjg","username":"test"},{"_id":"PJ-kCYiaq","username":"tom"}]</li>
+          <li>If you try to add a user that is already in the database -- {"userexists":"user already exists in the database"}</li>
+          <li>If you try to add activity log to a non existence user ID -- {"error":"User does not exist, create a new user first!"}</li>
+          <li>When you add a new activity log to a existing user ID -- {"username":"tom","description":"gym","duration":"60","_id":"PJ-kCYiaq","date":"Mon Mar 18 2019"}</li>
+          <li>When you retrieve all the activities log associating to a user ID -- {"totalExerciseMinutes":370,"userID":"PJ-kCYiaq","logs":[{"username":"tom","description":"run","duration":"40","date":"Mon Mar 18 2019"},{"username":"tom","description":"run","duration":"90","date":"Mon Mar 18 2019"},{"username":"tom","description":"run","duration":"90","date":"Mon Mar 12 2018"},{"username":"tom","description":"gym","duration":"90","date":"Thu Mar 15 2018"},{"username":"tom","description":"gym","duration":"60","date":"Mon Mar 18 2019"}]}</li>
+          <li>etc...</li>
+        </ul>
+          <p><strong>Example of usage:</strong></p>
+          <ul>
+            <li>127.0.0.1:50023/api/exercise/users -- retrieves a list of users and their IDs</li>
+            <li>127.0.0.1:50023/api/exercise/log?userId=PJ-kCYiaq -- retrieves all the logs associating to the user named tom</li>
+            <li>127.0.0.1:50023/api/exercise/log?userId=PJ-kCYiaq&limit=2 -- retrieves all the logs associating to the user named tom and limits the results returned to 1</li>
+            <li>127.0.0.1:50023/api/exercise/log?userId=PJ-kCYiaq&from=1990-02-23&to=2019-12-23 -- retrieves all the logs associating to the user named tom in the time span of 1990-02-23 to 2019-12-23</li>
+            <li>127.0.0.1:50023/api/exercise/log?userId=PJ-kCYiaq&from=1990-02-23&to=2019-12-23&limit=3 -- retrieves all the logs associating to the user named tom in the time span of 1990-02-23 to 2019-12-23 and limits the number of results returned to 1</li>
+            <li>etc...</li>
+        </ul>
+        
+      </div>
+   </body>
+
+</html>
